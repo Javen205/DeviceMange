@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/main_section_b"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_b_height"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center"
+        android:textSize="@dimen/main_text_size"
+        android:text="@string/main_section_b"/>
+</LinearLayout>

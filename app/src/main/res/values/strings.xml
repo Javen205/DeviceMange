@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DeviceMange</string>
+
+    <string name="receiver_description">xxxx</string>
+    <string name="main_section_a">AAA</string>
+    <string name="main_section_b">BBB</string>
+</resources>

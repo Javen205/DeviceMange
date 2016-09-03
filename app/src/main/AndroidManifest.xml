@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.javen.devicemange">
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".demo.DeviceActivity"/>
+        <activity android:theme="@style/AppTheme.NoActionBar" android:name=".sms.SMSActivity"/>
+
+        <receiver
+            android:name=".MyDeviceReceiver"
+            android:description="@string/receiver_description"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_manager_policies" />
+
+            <intent-filter>
+                <!--此处必须设定该Action，不设定则无法启动设备管理器，之前版本可启动但看不到的bug已被修复-->
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+
+        </receiver>
+
+        <!--设备管理-->
+        <receiver
+            android:name=".demo.DeviceReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+        <!--设备管理 END-->
+
+        <!-- 短信发送送达-->
+        <receiver android:name="com.javen.devicemange.sms.SMSReceiver"/>
+
+    </application>
+
+</manifest>
