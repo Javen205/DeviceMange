@@ -2,11 +2,15 @@ package com.javen.devicemange.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.javen.devicemange.R;
 import com.javen.devicemange.sms.SMSActivity;
@@ -27,6 +31,10 @@ public class DeviceActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Button id_clickMe=(Button)findViewById(R.id.id_clickMe);
+        //启动之后模拟点击显示Toast
+        setSimulateClick(id_clickMe, 10, 5);
     }
     // 激活程序
     public void OnActivate(View v) {
@@ -73,4 +81,21 @@ public class DeviceActivity extends AppCompatActivity {
         startActivity(new Intent(this, SMSActivity.class));
     }
 
+    public void simulateClick(View view){
+        Toast.makeText(this, "simulateClick clicked", Toast.LENGTH_LONG).show();
+    }
+
+    //模拟点击事件
+    private void setSimulateClick(View view, float x, float y) {
+        long downTime = SystemClock.uptimeMillis();
+        final MotionEvent downEvent = MotionEvent.obtain(downTime, downTime,
+                MotionEvent.ACTION_DOWN, x, y, 0);
+        downTime += 1000;
+        final MotionEvent upEvent = MotionEvent.obtain(downTime, downTime,
+                MotionEvent.ACTION_UP, x, y, 0);
+        view.onTouchEvent(downEvent);
+        view.onTouchEvent(upEvent);
+        downEvent.recycle();
+        upEvent.recycle();
+    }
 }

@@ -55,4 +55,10 @@
         android:layout_height="wrap_content"
         android:onClick="startSMSActivity"
         android:text="短信测试"/>
+    <Button
+        android:id="@+id/id_clickMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="simulateClick"
+        android:text="模拟点击"/>
 </LinearLayout>
